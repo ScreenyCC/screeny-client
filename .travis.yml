@@ -1,0 +1,15 @@
+language: java
+jdk:
+- oraclejdk8
+sudo: false
+script: mvn clean install -Denv=travis
+deploy:
+  provider: releases
+  api_key: "$GH_TOKEN"
+  file: "client/target/screeny.jar"
+  skip_cleanup: true
+  on:
+    repo: ScreenyCC/screeny-client
+    branch: master
+after_success:
+- sh set_tags.sh
